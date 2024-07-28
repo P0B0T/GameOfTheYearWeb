@@ -1,0 +1,50 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body, html, button {
+    background-color: black
+}
+
+footer {
+    text-align: center;
+    color: lightgray;
+}
+
+.divCenter, #divMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%
+}
+
+#divMenu, button {
+    border: 0.3em double white;
+    border-radius: 0.2em;
+    padding: 0.5em
+}
+
+h1 {
+    color: lightgray;
+    font-family: Arcade Classic;
+    font-size: 3em
+}
+
+button {
+    color: lightgray;
+    font-family: Pixel Emulator;
+    font-size: 1.5em;
+    margin: 0.5em;
+    width: 8em
+}
+
+button:hover {
+    color: white;
+    background-color: gray
+}
