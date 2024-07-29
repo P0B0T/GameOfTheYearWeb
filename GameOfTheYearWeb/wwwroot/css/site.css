@@ -94,5 +94,13 @@ label {
     width: 2em;
     height: 2em;
     background-color: #000;
-    border: 0.1em solid #333;
+    /*border: 0.1em solid #333*/
+}
+
+.player {
+    width: 2em;
+    height: 2em;
+    background-image: url('/images/Player.png');
+    background-size: cover;
+    position: absolute
 }

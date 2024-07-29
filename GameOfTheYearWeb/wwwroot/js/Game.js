@@ -1,19 +1,34 @@
-class Game {
-    constructor(rows, columns) {
-        this.rows = rows;
-        this.columns = columns;
-        this.gameBoard = document.getElementById('gameBoard');
-        this.InitBoard();
+const game = new GameBoard(21, 40);
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'ArrowUp':
+        case 'w':
+        case 'W':
+        case 'Ц':
+        case 'ц':
+            game.player.StartMoving('up');
+            break;
+        case 'ArrowDown':
+        case 's':
+        case 'S':
+        case 'Ы':
+        case 'ы':
+            game.player.StartMoving('down');
+            break;
+        case 'ArrowLeft':
+        case 'a':
+        case 'A':
+        case 'Ф':
+        case 'ф':
+            game.player.StartMoving('left');
+            break;
+        case 'ArrowRight':
+        case 'd':
+        case 'D':
+        case 'В':
+        case 'в':
+            game.player.StartMoving('right');
+            break;
     }
-    InitBoard() {
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.columns; j++) {
-                const cell = document.createElement('div');
-                cell.classList.add('cell');
-                this.gameBoard.appendChild(cell);
-            }
-        }
-    }
-}
-const game = new Game(21, 40);
-//# sourceMappingURL=Game.js.map
+});
+//# sourceMappingURL=game.js.map
