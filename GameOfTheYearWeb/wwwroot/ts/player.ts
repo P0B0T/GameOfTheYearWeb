@@ -1,29 +1,27 @@
 class Player {
-    private x: number;
-    private y: number;
+    public x: number;
+    public y: number;
     private gameBoard: HTMLElement;
     private playerElement: HTMLElement;
     private movingDirection: string | null = null;
     private moving: boolean = false;
     private movementInterval: number | null = null;
     private rotation: number = 0;
+    private crash: GameBoard;
+    public score: number = 0;
 
-    constructor(startX: number, startY: number, gameBoard: HTMLElement) {
+    constructor(startX: number, startY: number, gameBoard: HTMLElement, onGameBoardCrash: GameBoard) {
         this.x = startX;
         this.y = startY;
         this.gameBoard = gameBoard;
+        this.crash = onGameBoardCrash;
         this.playerElement = document.createElement('div');
         this.playerElement.classList.add('player');
         this.gameBoard.appendChild(this.playerElement);
         this.SetPosition();
-        this.SetRotation();
     }
 
     private SetPosition(): void {
-        this.playerElement.style.transform = `translate(${this.x * 2}em, ${this.y * 2}em) rotate(${this.rotation}deg)`;
-    }
-
-    private SetRotation(): void {
         this.playerElement.style.transform = `translate(${this.x * 2}em, ${this.y * 2}em) rotate(${this.rotation}deg)`;
     }
 
@@ -48,28 +46,35 @@ class Player {
         if (!this.moving || this.movingDirection === null) return;
         this.Move(this.movingDirection);
         this.SetPosition();
-        this.movementInterval = requestAnimationFrame(this.MoveLoop);
+        this.crash.CheckCrashFood();
+        if (this.crash.CheckCrashWall()) {
+            this.StopMoving();
+        }
+
+        setTimeout(() => {
+            this.movementInterval = requestAnimationFrame(this.MoveLoop);
+        }, 30);
     }
 
     private Move(direction: string): void {
         switch (direction) {
             case 'up':
-                this.y -= 0.3;
+                this.y -= 1;
                 this.rotation = 270;
                 break;
             case 'down':
-                this.y += 0.3;
+                this.y += 1;
                 this.rotation = 90;
                 break;
             case 'left':
-                this.x -= 0.3;
+                this.x -= 1;
                 this.rotation = 180;
                 break;
             case 'right':
-                this.x += 0.3;
+                this.x += 1;
                 this.rotation = 0;
                 break;
         }
-        this.SetRotation();
+        this.SetPosition();
     }
 }

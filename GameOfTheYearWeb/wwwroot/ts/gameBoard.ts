@@ -3,13 +3,17 @@ class GameBoard {
     private rows: number;
     private columns: number;
     public player: Player;
+    public food: Food;
+    private scoreInput: HTMLInputElement;
 
     constructor(rows: number, columns: number) {
         this.rows = rows;
         this.columns = columns;
         this.gameBoard = document.getElementById('gameBoard');
         this.InitBoard();
-        this.player = new Player(10, 10, this.gameBoard);
+        this.player = new Player(Math.floor(Math.random() * 40), Math.floor(Math.random() * 21), this.gameBoard, this);
+        this.food = new Food(this.gameBoard);
+        this.scoreInput = document.querySelector('#divScore input');
     }
 
     private InitBoard(): void {
@@ -20,5 +24,24 @@ class GameBoard {
                 this.gameBoard.appendChild(cell);
             }
         }
+    }
+
+    public CheckCrashFood(): void {
+        if (this.player.x == this.food.x && this.player.y == this.food.y) {
+            this.ScoreAdd();
+            this.food.SetRandomPosition();
+        }
+    }
+
+    public ScoreAdd(): void {
+        this.player.score++;
+        this.scoreInput.value = this.player.score.toString();
+    }
+
+    public CheckCrashWall(): boolean {
+        if (this.player.x < 0 || this.player.y < 0 || this.player.x > 40 || this.player.y > 21) {
+            return true;
+        }
+        return false;
     }
 }

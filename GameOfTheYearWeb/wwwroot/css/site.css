@@ -14,7 +14,7 @@ body, html, button {
 .footer {
     text-align: center;
     color: lightgray;
-    width: 100%;
+    width: 100%
 }
 
 .divCenter, #divMenu {
@@ -68,7 +68,8 @@ input {
     font-family: Pixel Emulator;
     font-size: 1.1em;
     font-weight: bold;
-    text-align: center
+    text-align: center;
+    padding-left: 1em
 }
 
 label {
@@ -79,22 +80,22 @@ label {
 }
 
 #gameBoard {
-    height: 44em;
-    width: 83em;
+    height: calc(100vh - 5em);
+    width: 82em;
     position: fixed;
     bottom: 4em;
     right: 11.7em;
     display: grid;
     grid-template-columns: repeat(40, 2em);
     grid-template-rows: repeat(21, 2em);
-    gap: 0.1em
+    gap: 0.1em;
+    border: 0.1em solid darkred
 }
 
 .cell {
     width: 2em;
     height: 2em;
     background-color: #000;
-    /*border: 0.1em solid #333*/
 }
 
 .player {
@@ -102,5 +103,13 @@ label {
     height: 2em;
     background-image: url('/images/Player.png');
     background-size: cover;
+    position: absolute
+}
+
+.food {
+    width: 1.5em;
+    height: 1.5em;
+    background-color: red;
+    border-radius: 10em;
     position: absolute
 }
