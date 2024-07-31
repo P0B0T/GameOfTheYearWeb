@@ -2,9 +2,10 @@ class GameBoard {
     private gameBoard: HTMLElement;
     private rows: number;
     private columns: number;
+    private scoreInput: HTMLInputElement;
+
     public player: Player;
     public food: Food;
-    private scoreInput: HTMLInputElement;
 
     constructor(rows: number, columns: number) {
         this.rows = rows;
@@ -36,6 +37,13 @@ class GameBoard {
     public ScoreAdd(): void {
         this.player.score++;
         this.scoreInput.value = this.player.score.toString();
+    }
+
+    public UpdateScoreInModal(): void {
+        const modalInput = document.querySelector('#modal input') as HTMLInputElement;
+        if (modalInput) {
+            modalInput.value = this.player.score.toString();
+        }
     }
 
     public CheckCrashWall(): boolean {

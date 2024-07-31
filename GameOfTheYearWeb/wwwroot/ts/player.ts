@@ -1,6 +1,8 @@
 class Player {
     public x: number;
     public y: number;
+    public score: number = 0;
+
     private gameBoard: HTMLElement;
     private playerElement: HTMLElement;
     private movingDirection: string | null = null;
@@ -8,7 +10,6 @@ class Player {
     private movementInterval: number | null = null;
     private rotation: number = 0;
     private crash: GameBoard;
-    public score: number = 0;
 
     constructor(startX: number, startY: number, gameBoard: HTMLElement, onGameBoardCrash: GameBoard) {
         this.x = startX;
@@ -27,8 +28,10 @@ class Player {
 
     public StartMoving(direction: string): void {
         if (this.moving && this.movingDirection === direction) return;
+
         this.movingDirection = direction;
         this.moving = true;
+
         if (!this.movementInterval) {
             this.MoveLoop();
         }
@@ -36,17 +39,19 @@ class Player {
 
     public StopMoving(): void {
         this.moving = false;
-        if (this.movementInterval !== null) {
-            cancelAnimationFrame(this.movementInterval);
-            this.movementInterval = null;
-        }
+        cancelAnimationFrame(this.movementInterval);
+        this.movementInterval = null;
+        this.crash.UpdateScoreInModal();
+        this.ModalShow();
     }
 
     private MoveLoop = () => {
         if (!this.moving || this.movingDirection === null) return;
+
         this.Move(this.movingDirection);
         this.SetPosition();
         this.crash.CheckCrashFood();
+
         if (this.crash.CheckCrashWall()) {
             this.StopMoving();
         }
@@ -76,5 +81,16 @@ class Player {
                 break;
         }
         this.SetPosition();
+    }
+
+    private ModalShow(): void {
+        const modal = $('#modal'); 
+
+        modal.modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
+        modal.modal('show');
     }
 }

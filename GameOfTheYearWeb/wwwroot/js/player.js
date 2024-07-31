@@ -1,10 +1,10 @@
 class Player {
     constructor(startX, startY, gameBoard, onGameBoardCrash) {
+        this.score = 0;
         this.movingDirection = null;
         this.moving = false;
         this.movementInterval = null;
         this.rotation = 0;
-        this.score = 0;
         this.MoveLoop = () => {
             if (!this.moving || this.movingDirection === null)
                 return;
@@ -41,10 +41,10 @@ class Player {
     }
     StopMoving() {
         this.moving = false;
-        if (this.movementInterval !== null) {
-            cancelAnimationFrame(this.movementInterval);
-            this.movementInterval = null;
-        }
+        cancelAnimationFrame(this.movementInterval);
+        this.movementInterval = null;
+        this.crash.UpdateScoreInModal();
+        this.ModalShow();
     }
     Move(direction) {
         switch (direction) {
@@ -66,6 +66,14 @@ class Player {
                 break;
         }
         this.SetPosition();
+    }
+    ModalShow() {
+        const modal = $('#modal');
+        modal.modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        modal.modal('show');
     }
 }
 //# sourceMappingURL=player.js.map

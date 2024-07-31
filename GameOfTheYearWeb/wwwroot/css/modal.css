@@ -1,0 +1,20 @@
+﻿.modal-dialog {
+    width: 15em
+}
+
+    .modal-body label {
+        color: lightgray
+    }
+
+.divMargin {
+    margin-top: 2em;
+    text-align: center
+}
+
+#name {
+    width: 10em
+}
+
+.modal, .modal-dialog, .modal-content {
+    pointer-events: auto !important;
+}

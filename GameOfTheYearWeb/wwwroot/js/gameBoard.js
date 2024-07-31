@@ -27,6 +27,12 @@ class GameBoard {
         this.player.score++;
         this.scoreInput.value = this.player.score.toString();
     }
+    UpdateScoreInModal() {
+        const modalInput = document.querySelector('#modal input');
+        if (modalInput) {
+            modalInput.value = this.player.score.toString();
+        }
+    }
     CheckCrashWall() {
         if (this.player.x < 0 || this.player.y < 0 || this.player.x > 40 || this.player.y > 21) {
             return true;

@@ -1,0 +1,47 @@
+﻿#divScore {
+    background-color: dimgray;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 10em;
+    text-align: center;
+    border: 0.3em solid white;
+    border-radius: 0.1em;
+    padding: 0.5em
+}
+
+#gameBoard {
+    height: calc(100vh - 5em);
+    width: 82em;
+    position: fixed;
+    bottom: 4em;
+    right: 11.7em;
+    display: grid;
+    grid-template-columns: repeat(40, 2em);
+    grid-template-rows: repeat(21, 2em);
+    gap: 0.1em;
+    border: 0.1em solid darkred
+}
+
+.cell {
+    width: 2em;
+    height: 2em;
+    background-color: #000
+}
+
+.player {
+    width: 2em;
+    height: 2em;
+    background-image: url('/images/Player.png');
+    background-size: cover;
+    position: absolute
+}
+
+.food {
+    width: 1.5em;
+    height: 1.5em;
+    background-color: red;
+    border-radius: 10em;
+    position: absolute
+}

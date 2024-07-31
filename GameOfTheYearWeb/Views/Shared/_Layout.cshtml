@@ -6,6 +6,8 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/game.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GameOfTheYearWeb.styles.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -14,6 +16,30 @@
     <main>
         @RenderBody()
     </main>
+
+    <div class="modal" id="modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-body">
+                <div class="divCenter">
+                    <h3>You Died!</h3>
+                    <div style="display: flex; text-align: center">
+                        <label style="margin-right: 0.1em">Your score: </label>
+                        <input #resultScore type="number" readonly value="0" />
+                    </div>
+                    <div class="divMargin">
+                        <label>Your name?</label>
+                        <input id="name"/>
+                        <button>Save</button>
+                    </div>
+                    <div class="divMargin">
+                        <label>Restart?</label>
+                        <button onclick="location.reload()">Restart</button>
+                        <button onclick="window.history.back()">Menu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         &copy; 2024 - GameOfTheYearWeb
