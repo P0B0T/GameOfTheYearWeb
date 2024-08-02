@@ -1,0 +1,29 @@
+﻿@using GameOfTheYearWeb.DataBase.Entity
+
+@model Record
+
+<div class="modal" id="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-body">
+            <div class="divCenter">
+                <h3>You Died!</h3>
+                <form asp-action="Add">
+                    <div style="display: flex; text-align: center">
+                        <label style="margin-right: 0.1em">Your score: </label>
+                        <input asp-for="@Model.Score" #resultScore type="number" readonly value="0" />
+                    </div>
+                    <div class="divMargin">
+                        <label>Your name?</label>
+                        <input required asp-for="@Model.Name" id="name" />
+                        <button>Save</button>
+                    </div>
+                </form>
+                <div class="divMargin">
+                    <label>Restart?</label>
+                    <button onclick="location.reload()">Restart</button>
+                    <button onclick="window.history.back()">Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
