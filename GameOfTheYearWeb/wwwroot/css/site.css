@@ -63,12 +63,14 @@ input {
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
-    padding-left: 1em
 }
 
 label {
     font-family: Pixel Emulator;
     font-size: 1.5em;
     font-weight: bold;
-    color: black
+    color: black;
+    word-wrap: break-word;
+    hyphens: auto;
+    width: 5.9em
 }

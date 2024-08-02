@@ -1,0 +1,1 @@
+{"version":3,"file":"removeExtraSpaces.js","sourceRoot":"","sources":["../ts/removeExtraSpaces.ts"],"names":[],"mappings":"AAAA,SAAS,iBAAiB,CAAC,OAAO;IAE9B,IAAI,UAAU,GAAG,OAAO,CAAC,KAAK,CAAC;IAE/B,UAAU,GAAG,UAAU,CAAC,OAAO,CAAC,SAAS,EAAE,GAAG,CAAC,CAAC,IAAI,EAAE,CAAC;IAEvD,OAAO,CAAC,KAAK,GAAG,UAAU,CAAC;AAC/B,CAAC"}

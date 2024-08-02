@@ -41,6 +41,7 @@ class Player {
     }
     StopMoving() {
         this.moving = false;
+        this.MovingByOne(this.movingDirection);
         cancelAnimationFrame(this.movementInterval);
         this.movementInterval = null;
         this.crash.UpdateScoreInModal();
@@ -74,6 +75,22 @@ class Player {
             keyboard: false
         });
         modal.modal('show');
+    }
+    MovingByOne(direction) {
+        switch (direction) {
+            case 'up':
+                this.y -= 1;
+                break;
+            case 'down':
+                this.y += 1;
+                break;
+            case 'left':
+                this.x -= 1;
+                break;
+            case 'right':
+                this.x += 1;
+                break;
+        }
     }
 }
 //# sourceMappingURL=player.js.map

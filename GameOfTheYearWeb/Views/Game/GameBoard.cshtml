@@ -1,10 +1,24 @@
-﻿@{
+﻿@using GameOfTheYearWeb.DataBase.Entity
+
+@{
     ViewData["Title"] = "Game";
 }
+
+@model IEnumerable<Record>
 
 <div id="gameBoard"></div>
 
 <div id="divScore">
     <label>Player score:</label>
-    <input type="number" readonly value="0"/>
+    <input style="padding-left: 1em" type="number" readonly value="0" />
+    <div class="divMargin">
+        <label>Top players:</label>
+        @foreach (var item in Model)
+        {
+            <div>
+                <label>@item.Name</label>
+                <label>@item.Score</label>
+            </div>
+        }
+    </div>
 </div>

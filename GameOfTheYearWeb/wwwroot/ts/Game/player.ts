@@ -39,6 +39,7 @@ class Player {
 
     public StopMoving(): void {
         this.moving = false;
+        this.MovingByOne(this.movingDirection);
         cancelAnimationFrame(this.movementInterval);
         this.movementInterval = null;
         this.crash.UpdateScoreInModal();
@@ -92,5 +93,22 @@ class Player {
         });
 
         modal.modal('show');
+    }
+
+    private MovingByOne(direction: string): void {
+        switch (direction) {
+            case 'up':
+                this.y -= 1;
+                break;
+            case 'down':
+                this.y += 1;
+                break;
+            case 'left':
+                this.x -= 1;
+                break;
+            case 'right':
+                this.x += 1;
+                break;
+        }
     }
 }
