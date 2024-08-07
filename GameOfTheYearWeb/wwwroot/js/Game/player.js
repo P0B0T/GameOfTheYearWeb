@@ -1,29 +1,40 @@
 class Player {
-    constructor(startX, startY, gameBoard, onGameBoardCrash) {
+    constructor(startX, startY, gameBoard, onGameBoardCrash, playerClass) {
         this.score = 0;
         this.movingDirection = null;
         this.moving = false;
         this.movementInterval = null;
         this.rotation = 0;
+        this.crashed = false;
         this.MoveLoop = () => {
             if (!this.moving || this.movingDirection === null)
                 return;
             this.Move(this.movingDirection);
             this.SetPosition();
             this.crash.CheckCrashFood();
-            if (this.crash.CheckCrashWall()) {
+            if (this.crash.CheckCrashWall(this)) {
                 this.StopMoving();
+                const player1Crashed = this.crash.CheckCrashWall(this.crash.player);
+                const player2Crashed = this.crash.player2 ? this.crash.CheckCrashWall(this.crash.player2) : true;
+                if (player1Crashed && player2Crashed) {
+                    this.crash.UpdateScoreInModal();
+                    this.ModalShow();
+                    const labelVictory = document.querySelector('#victory');
+                    labelVictory.textContent = this.crash.ScoreCompare();
+                }
             }
-            setTimeout(() => {
-                this.movementInterval = requestAnimationFrame(this.MoveLoop);
-            }, 30);
+            else {
+                setTimeout(() => {
+                    this.movementInterval = requestAnimationFrame(this.MoveLoop);
+                }, 30);
+            }
         };
         this.x = startX;
         this.y = startY;
         this.gameBoard = gameBoard;
         this.crash = onGameBoardCrash;
         this.playerElement = document.createElement('div');
-        this.playerElement.classList.add('player');
+        this.playerElement.classList.add('player', playerClass);
         this.gameBoard.appendChild(this.playerElement);
         this.SetPosition();
     }
@@ -31,21 +42,18 @@ class Player {
         this.playerElement.style.transform = `translate(${this.x * 2}em, ${this.y * 2}em) rotate(${this.rotation}deg)`;
     }
     StartMoving(direction) {
-        if (this.moving && this.movingDirection === direction)
+        if (this.crashed || (this.moving && this.movingDirection === direction))
             return;
         this.movingDirection = direction;
         this.moving = true;
-        if (!this.movementInterval) {
+        if (!this.movementInterval)
             this.MoveLoop();
-        }
     }
     StopMoving() {
         this.moving = false;
-        this.MovingByOne(this.movingDirection);
         cancelAnimationFrame(this.movementInterval);
         this.movementInterval = null;
-        this.crash.UpdateScoreInModal();
-        this.ModalShow();
+        this.crashed = true;
     }
     Move(direction) {
         switch (direction) {
@@ -75,22 +83,6 @@ class Player {
             keyboard: false
         });
         modal.modal('show');
-    }
-    MovingByOne(direction) {
-        switch (direction) {
-            case 'up':
-                this.y -= 1;
-                break;
-            case 'down':
-                this.y += 1;
-                break;
-            case 'left':
-                this.x -= 1;
-                break;
-            case 'right':
-                this.x += 1;
-                break;
-        }
     }
 }
 //# sourceMappingURL=player.js.map

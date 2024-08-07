@@ -8,17 +8,32 @@
 
 <div id="gameBoard"></div>
 
-<div id="divScore">
-    <label>Player score:</label>
-    <input style="padding-left: 1em" type="number" readonly value="0" />
-    <div class="divMargin">
-        <label>Top players:</label>
-        @foreach (var item in Model)
-        {
-            <div>
-                <label>@item.Name</label>
-                <label>@item.Score</label>
-            </div>
-        }
+@if (ViewBag.Mode == "two")
+{
+    <div id="divScore">
+        <label>Player1 score:</label>
+        <input style="padding-left: 1em" type="number" readonly value="0" />
     </div>
-</div>
+
+    <div id="divScore2">
+        <label>Player2 score:</label>
+        <input style="padding-left: 1em" type="number" readonly value="0" />
+    </div>
+}
+else
+{
+    <div id="divScore">
+        <label>Player score:</label>
+        <input style="padding-left: 1em" type="number" readonly value="0" />
+        <div class="divMargin">
+            <label>Top players:</label>
+            @foreach (var item in Model)
+            {
+                <div>
+                    <label>@item.Name</label>
+                    <label>@item.Score</label>
+                </div>
+            }
+        </div>
+    </div>
+}

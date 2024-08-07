@@ -11,6 +11,15 @@
     padding: 0.5em
 }
 
+#divScore2 {
+    position: absolute;
+    top: 9em;
+    right: 0;
+    width: 10em;
+    text-align: center;
+    padding: 0.5em
+}
+
 #gameBoard {
     height: calc(100vh - 5em);
     width: 82em;
@@ -30,12 +39,16 @@
     background-color: #000
 }
 
-.player {
+.player, .player2 {
     width: 2em;
     height: 2em;
     background-image: url('/images/Player.png');
     background-size: cover;
     position: absolute
+}
+
+.player2 {
+    background-image: url('/images/Player2.png');
 }
 
 .food {

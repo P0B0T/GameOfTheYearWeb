@@ -13,7 +13,17 @@ namespace GameOfTheYearWeb.Controllers
             _context = context;
         }
 
-        public ActionResult GameBoard() => View(GetTopFive());
+        public ActionResult GameBoard(string mode)
+        {
+            if (string.IsNullOrEmpty(mode))
+            {
+                ViewBag.Mode = "one";
+                return View(GetTopFive());
+            }
+
+            ViewBag.Mode = "two";
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Add(Record record)

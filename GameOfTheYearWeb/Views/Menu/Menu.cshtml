@@ -8,6 +8,6 @@
 
 <div id="divMenu">
     <button onclick="location.href='@Url.Action("GameBoard", "Game")'">One player</button>
-    <button>Two players</button>
+    <button onclick="location.href = '@Url.Action("GameBoard", "Game")?mode=two'">Two players</button>
     <button onclick="location.href='@Url.Action("Exit", "Exit")'">Exit</button>
 </div>

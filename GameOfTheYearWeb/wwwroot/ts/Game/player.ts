@@ -10,14 +10,15 @@ class Player {
     private movementInterval: number | null = null;
     private rotation: number = 0;
     private crash: GameBoard;
+    private crashed: boolean = false;
 
-    constructor(startX: number, startY: number, gameBoard: HTMLElement, onGameBoardCrash: GameBoard) {
+    constructor(startX: number, startY: number, gameBoard: HTMLElement, onGameBoardCrash: GameBoard, playerClass?: string) {
         this.x = startX;
         this.y = startY;
         this.gameBoard = gameBoard;
         this.crash = onGameBoardCrash;
         this.playerElement = document.createElement('div');
-        this.playerElement.classList.add('player');
+        this.playerElement.classList.add('player', playerClass);
         this.gameBoard.appendChild(this.playerElement);
         this.SetPosition();
     }
@@ -27,39 +28,49 @@ class Player {
     }
 
     public StartMoving(direction: string): void {
-        if (this.moving && this.movingDirection === direction) return;
+        if (this.crashed || (this.moving && this.movingDirection === direction))
+            return;
 
         this.movingDirection = direction;
         this.moving = true;
 
-        if (!this.movementInterval) {
+        if (!this.movementInterval)
             this.MoveLoop();
-        }
     }
 
     public StopMoving(): void {
         this.moving = false;
-        this.MovingByOne(this.movingDirection);
         cancelAnimationFrame(this.movementInterval);
         this.movementInterval = null;
-        this.crash.UpdateScoreInModal();
-        this.ModalShow();
+        this.crashed = true;
     }
 
     private MoveLoop = () => {
-        if (!this.moving || this.movingDirection === null) return;
+        if (!this.moving || this.movingDirection === null)
+            return;
 
         this.Move(this.movingDirection);
         this.SetPosition();
         this.crash.CheckCrashFood();
 
-        if (this.crash.CheckCrashWall()) {
+        if (this.crash.CheckCrashWall(this)) {
             this.StopMoving();
-        }
 
-        setTimeout(() => {
-            this.movementInterval = requestAnimationFrame(this.MoveLoop);
-        }, 30);
+            const player1Crashed = this.crash.CheckCrashWall(this.crash.player);
+            const player2Crashed = this.crash.player2 ? this.crash.CheckCrashWall(this.crash.player2) : true;
+
+            if (player1Crashed && player2Crashed) {
+                this.crash.UpdateScoreInModal();
+                this.ModalShow();
+
+                const labelVictory = document.querySelector('#victory') as HTMLElement;
+                labelVictory.textContent = this.crash.ScoreCompare();
+            }
+        } else {
+            setTimeout(() => {
+                this.movementInterval = requestAnimationFrame(this.MoveLoop);
+            }, 30);
+        }
     }
 
     private Move(direction: string): void {
@@ -85,7 +96,7 @@ class Player {
     }
 
     private ModalShow(): void {
-        const modal = $('#modal'); 
+        const modal = $('#modal');
 
         modal.modal({
             backdrop: 'static',
@@ -93,22 +104,5 @@ class Player {
         });
 
         modal.modal('show');
-    }
-
-    private MovingByOne(direction: string): void {
-        switch (direction) {
-            case 'up':
-                this.y -= 1;
-                break;
-            case 'down':
-                this.y += 1;
-                break;
-            case 'left':
-                this.x -= 1;
-                break;
-            case 'right':
-                this.x += 1;
-                break;
-        }
     }
 }
