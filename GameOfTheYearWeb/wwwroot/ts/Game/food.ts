@@ -15,8 +15,8 @@ class Food {
 
     public SetRandomPosition() {
         this.x = Math.floor(Math.random() * 40);
-        this.y = Math.floor(Math.random() * 21)
+        this.y = Math.floor(Math.random() * 21);
 
-        this.foodElement.style.transform = `translate(${this.x * 2}em, ${this.y * 2}em)`;
+        this.foodElement.style.transform = `translate(${this.x * 168}%, ${this.y * 159}%)`;
     }
 }

@@ -39,7 +39,7 @@ class Player {
         this.SetPosition();
     }
     SetPosition() {
-        this.playerElement.style.transform = `translate(${this.x * 2}em, ${this.y * 2}em) rotate(${this.rotation}deg)`;
+        this.playerElement.style.transform = `translate(${this.x * 98}%, ${this.y * 91}%) rotate(${this.rotation}deg)`;
     }
     StartMoving(direction) {
         if (this.crashed || (this.moving && this.movingDirection === direction))

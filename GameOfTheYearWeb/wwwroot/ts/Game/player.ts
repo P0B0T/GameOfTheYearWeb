@@ -24,7 +24,7 @@ class Player {
     }
 
     private SetPosition(): void {
-        this.playerElement.style.transform = `translate(${this.x * 2}em, ${this.y * 2}em) rotate(${this.rotation}deg)`;
+        this.playerElement.style.transform = `translate(${this.x * 98}%, ${this.y * 91}%) rotate(${this.rotation}deg)`;
     }
 
     public StartMoving(direction: string): void {
