@@ -35,8 +35,7 @@
 
 .cell {
     width: 100%;
-    height: 100%;
-    background-color: #000
+    height: 100%
 }
 
 .player, .player2 {
@@ -52,9 +51,9 @@
 }
 
 .food {
-    width: 1.5%;
-    height: 3%;
-    background-color: red;
-    border-radius: 10em;
-    position: absolute
+    width: 2.5%;
+    height: 5%;
+    background-image: url('/images/Food.png');
+    position: absolute;
+    background-size: cover
 }

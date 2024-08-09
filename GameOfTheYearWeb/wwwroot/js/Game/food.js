@@ -9,7 +9,7 @@ class Food {
     SetRandomPosition() {
         this.x = Math.floor(Math.random() * 40);
         this.y = Math.floor(Math.random() * 21);
-        this.foodElement.style.transform = `translate(${this.x * 168}%, ${this.y * 159}%)`;
+        this.foodElement.style.transform = `translate(${this.x * 98}%, ${this.y * 91}%)`;
     }
 }
 //# sourceMappingURL=food.js.map
