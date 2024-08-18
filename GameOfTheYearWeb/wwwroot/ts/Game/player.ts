@@ -11,16 +11,24 @@ class Player {
     private rotation: number = 0;
     private crash: GameBoard;
     private crashed: boolean = false;
+    private speedChanger: HTMLInputElement;
+    private currentSpeed: HTMLSpanElement;
 
     constructor(startX: number, startY: number, gameBoard: HTMLElement, onGameBoardCrash: GameBoard, playerClass?: string) {
         this.x = startX;
         this.y = startY;
         this.gameBoard = gameBoard;
         this.crash = onGameBoardCrash;
+
         this.playerElement = document.createElement('div');
         this.playerElement.classList.add('player', playerClass);
         this.gameBoard.appendChild(this.playerElement);
+
+        this.speedChanger = document.querySelector('#divSpeed input');
+        this.currentSpeed = document.querySelector('#divSpeed span');
+
         this.SetPosition();
+        this.SpeedChange();
     }
 
     private SetPosition(): void {
@@ -69,7 +77,7 @@ class Player {
         } else {
             setTimeout(() => {
                 this.movementInterval = requestAnimationFrame(this.MoveLoop);
-            }, 30);
+            }, 30 / this.SpeedChange());
         }
     }
 
@@ -105,4 +113,13 @@ class Player {
 
         modal.modal('show');
     }
+
+    private SpeedChange(): number {
+        this.speedChanger.addEventListener('input', () => {
+            this.currentSpeed.textContent = this.speedChanger.value;
+        });
+
+        return this.speedChanger.valueAsNumber;
+    }
+
 }

@@ -26,7 +26,7 @@ class Player {
             else {
                 setTimeout(() => {
                     this.movementInterval = requestAnimationFrame(this.MoveLoop);
-                }, 30);
+                }, 30 / this.SpeedChange());
             }
         };
         this.x = startX;
@@ -36,7 +36,10 @@ class Player {
         this.playerElement = document.createElement('div');
         this.playerElement.classList.add('player', playerClass);
         this.gameBoard.appendChild(this.playerElement);
+        this.speedChanger = document.querySelector('#divSpeed input');
+        this.currentSpeed = document.querySelector('#divSpeed span');
         this.SetPosition();
+        this.SpeedChange();
     }
     SetPosition() {
         this.playerElement.style.transform = `translate(${this.x * 98}%, ${this.y * 91}%) rotate(${this.rotation}deg)`;
@@ -83,6 +86,12 @@ class Player {
             keyboard: false
         });
         modal.modal('show');
+    }
+    SpeedChange() {
+        this.speedChanger.addEventListener('input', () => {
+            this.currentSpeed.textContent = this.speedChanger.value;
+        });
+        return this.speedChanger.valueAsNumber;
     }
 }
 //# sourceMappingURL=player.js.map

@@ -12,10 +12,13 @@ class GameBoard {
     constructor(rows: number, columns: number, isTwo: boolean) {
         this.rows = rows;
         this.columns = columns;
+
         this.gameBoard = document.getElementById('gameBoard');
+
         this.InitBoard();
         this.player = new Player(Math.floor(Math.random() * 40), Math.floor(Math.random() * 21), this.gameBoard, this);
         this.food = new Food(this.gameBoard);
+
         this.scoreInput = document.querySelector('#divScore input');
         this.player2 = isTwo ? new Player(Math.floor(Math.random() * 40), Math.floor(Math.random() * 21), this.gameBoard, this, "player2") : null;
         this.scoreInput2 = document.querySelector('#divScore2 input');

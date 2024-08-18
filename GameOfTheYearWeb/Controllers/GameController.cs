@@ -18,7 +18,7 @@ namespace GameOfTheYearWeb.Controllers
             if (string.IsNullOrEmpty(mode))
             {
                 ViewBag.Mode = "one";
-                return View(GetTopFive());
+                return View(GetTopThree());
             }
 
             ViewBag.Mode = "two";
@@ -34,8 +34,8 @@ namespace GameOfTheYearWeb.Controllers
             return RedirectToAction("GameBoard");
         }
 
-        public List<Record> GetTopFive() => _context.Records.OrderByDescending(x => x.Score)
-                                                            .Take(5)
-                                                            .ToList();
+        public List<Record> GetTopThree() => _context.Records.OrderByDescending(x => x.Score)
+                                                             .Take(3)
+                                                             .ToList();
     }
 }

@@ -7,9 +7,11 @@ class Food {
 
     constructor(gameBoard: HTMLElement) {
         this.gameBoard = gameBoard;
+
         this.foodElement = document.createElement('div');
         this.foodElement.classList.add('food');
         this.gameBoard.appendChild(this.foodElement);
+
         this.SetRandomPosition();
     }
 
