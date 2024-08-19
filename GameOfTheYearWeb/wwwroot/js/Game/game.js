@@ -1,5 +1,16 @@
 const mode = window['gameMode'];
 let game;
+const currentSpeed = document.querySelector('#divSpeed span');
+const speedChanger = document.querySelector('#divSpeed input');
+const speed = Cookies.GetCookie('speed');
+if (typeof speed != 'undefined' && speed) {
+    currentSpeed.textContent = speed;
+    speedChanger.value = speed;
+}
+else {
+    currentSpeed.textContent = "1";
+    speedChanger.valueAsNumber = 1;
+}
 if (mode === "two") {
     game = new GameBoard(21, 40, true);
 }

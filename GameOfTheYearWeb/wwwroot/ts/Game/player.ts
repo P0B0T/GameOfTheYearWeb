@@ -115,8 +115,20 @@ class Player {
     }
 
     private SpeedChange(): number {
+        this.speedChanger.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                case 'ArrowDown':
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    event.preventDefault();
+            }
+        });
+
         this.speedChanger.addEventListener('input', () => {
             this.currentSpeed.textContent = this.speedChanger.value;
+
+            Cookies.SetCookie('speed', this.speedChanger.valueAsNumber);
         });
 
         return this.speedChanger.valueAsNumber;
